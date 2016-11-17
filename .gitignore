@@ -61,7 +61,6 @@ local_settings.py
 instance/
 .webassets-cache
 
-.txt
 # Scrapy stuff:
 .scrapy
 
@@ -92,4 +91,6 @@ ENV/
 .spyderproject
 
 # Rope project settings
-.ropeproject
+.ropeprojectz
+
+*.pyc 
