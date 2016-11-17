@@ -1,0 +1,223 @@
+agent_defaults:
+  actuation_noise_x: 0.1
+  actuation_noise_y: 0.1
+  actuation_noise_theta: 0.1
+  observation_noise_x: 1
+  observation_noise_y: 1
+  observation_noise_theta: 1
+  behavior_type: ParametricConstants
+  behavior_config:
+    - time: 0
+      x: 1
+      y: 0
+      theta: 0
+    - time: 500
+      x: -1
+      y: 0
+      theta: 0
+    - time: 1000
+      x: 1
+      y: 0
+      theta: 0
+    - time: 1500
+      x: -1
+      y: 0
+      theta: 0
+    - time: 2000
+      x: -1
+      y: 0
+      theta: 0
+agents:
+  - id: 1
+    x0: 600
+    y0: 12
+    theta0: 0
+    behavior_type: ParametricConstants
+    behavior_config:
+      - time: 0
+        x: -1
+        y: 0
+        theta: 0
+      - time: 500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 1000
+        x: -1
+        y: 0
+        theta: 0
+      - time: 1500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 2000
+        x: -1
+        y: 0
+        theta: 0
+  - id: 2
+    x0: 25
+    y0: 25
+    theta0: 0
+  - id: 3
+    x0: 600
+    y0: 37
+    theta0: 0
+    behavior_type: ParametricConstants
+    behavior_config:
+      - time: 0
+        x: -1
+        y: 0
+        theta: 0
+      - time: 500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 1000
+        x: -1
+        y: 0
+        theta: 0
+      - time: 1500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 2000
+        x: -1
+        y: 0
+        theta: 0
+  - id: 4
+    x0: 25
+    y0: 50
+    theta0: 0
+  - id: 5
+    x0: 600
+    y0: 62
+    theta0: 0
+    behavior_type: ParametricConstants
+    behavior_config:
+      - time: 0
+        x: -1
+        y: 0
+        theta: 0
+      - time: 500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 1000
+        x: -1
+        y: 0
+        theta: 0
+      - time: 1500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 2000
+        x: -1
+        y: 0
+        theta: 0
+  - id: 6
+    x0: 25
+    y0: 75
+    theta0: 0
+  - id: 7
+    x0: 600
+    y0: 87
+    theta0: 0
+    behavior_type: ParametricConstants
+    behavior_config:
+      - time: 0
+        x: -1
+        y: 0
+        theta: 0
+      - time: 500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 1000
+        x: -1
+        y: 0
+        theta: 0
+      - time: 1500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 2000
+        x: -1
+        y: 0
+        theta: 0
+  - id: 8
+    x0: 25
+    y0: 100
+    theta0: 0
+  - id: 9
+    x0: 600
+    y0: 112
+    theta0: 0
+    behavior_type: ParametricConstants
+    behavior_config:
+      - time: 0
+        x: -1
+        y: 0
+        theta: 0
+      - time: 500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 1000
+        x: -1
+        y: 0
+        theta: 0
+      - time: 1500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 2000
+        x: -1
+        y: 0
+        theta: 0
+  - id: 10
+    x0: 25
+    y0: 125
+    theta0: 0
+  - id: 11
+    x0: 600
+    y0: 137
+    theta0: 0
+    behavior_type: ParametricConstants
+    behavior_config:
+      - time: 0
+        x: -1
+        y: 0
+        theta: 0
+      - time: 500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 1000
+        x: -1
+        y: 0
+        theta: 0
+      - time: 1500
+        x: 1
+        y: 0
+        theta: 0
+      - time: 2000
+        x: -1
+        y: 0
+        theta: 0
+  - id: 12
+    x0: 25
+    y0: 150
+    theta0: 0
+
+world:
+  initial_procedure: auto
+  steps_per_frame: 5
+  frames_per_second: 12
+  limit: 2000
+  size:
+    - 650
+    - 200
+visuals:
+  scale: 0.5
+  steps_per_frame: 10
+  frames_per_second: 12
