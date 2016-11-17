@@ -14,4 +14,5 @@ if __name__ == "__main__":
         config_doc = f.read()
     config_dom = yaml.load(config_doc)
 
-    botpen.main(config_dom, args.v, args.o)
+    config_dom['view_on'] = args.v
+    botpen.main(config_dom, args.o)

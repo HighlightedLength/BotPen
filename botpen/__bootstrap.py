@@ -2,9 +2,12 @@ from aglyph.binder import Binder
 from aglyph.component import Reference
 from random import Random
 
-def bootstrap(config, view_on, output_path):
+def bootstrap(config, output_path):
     container = Binder()
     rng = __build_rng(config)
+
+    renderer = __bind_view_components(container, config)
+
     (container.bind("logistics.Logger",
             to = "logistics.Logger"))
 
@@ -14,7 +17,7 @@ def bootstrap(config, view_on, output_path):
         .init(
             config,
             Reference("app.Controller"),
-            Reference("view.Renderer"),
+            renderer,
             Reference("view.Logger")))
 
     (container.bind("app.Controller",
@@ -51,7 +54,7 @@ def bootstrap(config, view_on, output_path):
     __bind_factories(container, config, rng, estimation_strategies)
     __bind_behavior_components(container, config)
     __bind_repos(container)
-    __bind_view_components(container, config)
+
     return container
 
 def __build_rng(config):
@@ -148,32 +151,36 @@ def __bind_estimation_strategies(container, config):
         Reference("domain.KalmanEstimator")]
 
 def __bind_view_components(container, config):
-    (container.bind("view.AgentService",
-            to = "botpen.view.services.AgentService",
-            strategy = "singleton"))
+    if config.get('view_on'):
+        (container.bind("view.AgentService",
+                to = "botpen.view.services.AgentService",
+                strategy = "singleton"))
 
-    (container.bind("view.OdometryEstimationService",
-            to = "botpen.view.services.EstimationService",
-            strategy = "singleton")
-        .init("Odometry",(127,127,255,255)))
-    (container.bind("view.FormationEstimationService",
-            to = "botpen.view.services.FormationEstimationService",
-            strategy = "singleton")
-        .init((255,63,63,255)))
-    (container.bind("view.KalmanEstimationService",
-            to = "botpen.view.services.EstimationService",
-            strategy = "singleton")
-        .init("Kalman",(255,0,255,255)))
+        (container.bind("view.OdometryEstimationService",
+                to = "botpen.view.services.EstimationService",
+                strategy = "singleton")
+            .init("Odometry",(127,127,255,255)))
+        (container.bind("view.FormationEstimationService",
+                to = "botpen.view.services.FormationEstimationService",
+                strategy = "singleton")
+            .init((255,63,63,255)))
+        (container.bind("view.KalmanEstimationService",
+                to = "botpen.view.services.EstimationService",
+                strategy = "singleton")
+            .init("Kalman",(255,0,255,255)))
 
-    estimation_services = [
-        Reference("view.OdometryEstimationService"),
-        Reference("view.FormationEstimationService"),
-        Reference("view.KalmanEstimationService")]
+        estimation_services = [
+            Reference("view.OdometryEstimationService"),
+            Reference("view.FormationEstimationService"),
+            Reference("view.KalmanEstimationService")]
 
-    (container.bind("view.Renderer",
-            to = "botpen.view.Renderer",
-            strategy = "singleton")
-        .init(
-            Reference("view.AgentService"),
-            *estimation_services
-        ))
+        (container.bind("view.Renderer",
+                to = "botpen.view.Renderer",
+                strategy = "singleton")
+            .init(
+                Reference("view.AgentService"),
+                *estimation_services
+            ))
+        return Reference('view.Renderer')
+    else:
+        return None

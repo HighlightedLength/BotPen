@@ -1,5 +1,8 @@
 import json
 import numpy as np
+import math
+from pprint import pprint
+import os
 
 class Logger:
     config = None
@@ -10,28 +13,34 @@ class Logger:
     def log(self, view):
         output_path = self.config.get("output_path")
 
-        #process data and calculate errors
-        logData = {}
+        agents = view['agents']
+        agent_count = len(agents)
+        result = {}
 
-        errDict = {}
-        """
         for strategy in view['estimates']:
-            if(strategy == "Formation"):
-                continue
-            errXY = []
-            for agent in view['estimates'][strategy]:
-                errXY[0] = agent[1] - view['agents'][agent][1]
-                errXY[1] = agent[2] - view['agents'][agent][2]
+            estimates = (
+                view['estimates'][strategy]['estimates']
+                if strategy == 'Formation'
+                else view['estimates'][strategy]
+            )
 
-                #odoErrZ += np.sqrt(np.sum(np.pow(odoErr,2)))
-            errDict[strategy][0] = np.sqrt(np.sum(np.pow(errXY,2)))
-            errDict[strategy]
-        """
+            distance = 0
+            angle = 0
+            for agent in agents:
+                dx_squared = math.pow(estimates[agent.id].x - agent.x,2)
+                dy_squared = math.pow(estimates[agent.id].y - agent.y,2)
+                abs_dtheta = abs(estimates[agent.id].theta%(2*math.pi) - agent.theta%(2*math.pi))
 
-        logData[view['time']] = view['estimates']
-        f = open('logData.txt',"a")
-        logStr = json.dumps(logData)
-        logStr += '\n'
-        f.write(logStr)
+                distance += math.sqrt(dx_squared + dy_squared)
+                angle += abs_dtheta%(2*math.pi)
 
-        print("in logger: {0}".format(output_path))
+            result[strategy] = {
+                'distance' : distance/agent_count,
+                'angle': angle/agent_count
+            }
+
+        dest = os.path.abspath(output_path)
+        print(dest)
+        with open(os.path.abspath(output_path), 'a') as f:
+            f.write(json.dumps(result))
+            f.write('\n')

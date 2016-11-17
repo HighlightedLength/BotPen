@@ -31,15 +31,15 @@ class WorldService:
 
     def update_lifecycle(self, updates):
         procedure = self.world_repo.get_procedure()
-
-        if updates.get('finish'):
-            self.world_repo.set_procedure(Procedure.finish)
-        elif updates.get('toggle_auto') and procedure == Procedure.pause:
-            self.world_repo.set_procedure(Procedure.auto)
-        elif updates.get('toggle_auto') or updates.get('pause'):
-            self.world_repo.set_procedure(Procedure.pause)
-        elif updates.get('step'):
-            self.world_repo.set_procedure(Procedure.step)
+        if updates:
+            if updates.get('finish'):
+                self.world_repo.set_procedure(Procedure.finish)
+            elif updates.get('toggle_auto') and procedure == Procedure.pause:
+                self.world_repo.set_procedure(Procedure.auto)
+            elif updates.get('toggle_auto') or updates.get('pause'):
+                self.world_repo.set_procedure(Procedure.pause)
+            elif updates.get('step'):
+                self.world_repo.set_procedure(Procedure.step)
 
     def step(self):
         time = self.world_repo.get_time()

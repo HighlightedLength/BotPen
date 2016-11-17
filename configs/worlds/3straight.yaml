@@ -41,7 +41,7 @@ agents:
     y0: 50
     theta0: 0
 world:
-  initial_procedure: pause
+  initial_procedure: auto
   steps_per_frame: 5
   frames_per_second: 12
   limit: 2000
