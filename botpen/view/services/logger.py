@@ -13,34 +13,42 @@ class Logger:
     def log(self, view):
         output_path = self.config.get("output_path")
 
-        agents = view['agents']
-        agent_count = len(agents)
-        result = {}
+        if output_path:
+            output_path = os.path.abspath(output_path)
+            output_dir = os.path.dirname(output_path)
+            
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
 
-        for strategy in view['estimates']:
-            estimates = (
-                view['estimates'][strategy]['estimates']
-                if strategy == 'Formation'
-                else view['estimates'][strategy]
-            )
 
-            distance = 0
-            angle = 0
-            for agent in agents:
-                dx_squared = math.pow(estimates[agent.id].x - agent.x,2)
-                dy_squared = math.pow(estimates[agent.id].y - agent.y,2)
-                abs_dtheta = abs(estimates[agent.id].theta%(2*math.pi) - agent.theta%(2*math.pi))
+            agents = view['agents']
+            agent_count = len(agents)
+            result = {}
 
-                distance += math.sqrt(dx_squared + dy_squared)
-                angle += abs_dtheta%(2*math.pi)
+            for strategy in view['estimates']:
+                estimates = (
+                    view['estimates'][strategy]['estimates']
+                    if strategy == 'Formation'
+                    else view['estimates'][strategy]
+                )
 
-            result[strategy] = {
-                'distance' : distance/agent_count,
-                'angle': angle/agent_count
-            }
+                distance = 0
+                angle = 0
+                for agent in agents:
+                    dx_squared = math.pow(estimates[agent.id].x - agent.x,2)
+                    dy_squared = math.pow(estimates[agent.id].y - agent.y,2)
+                    abs_dtheta = abs(estimates[agent.id].theta%(2*math.pi) - agent.theta%(2*math.pi))
 
-        dest = os.path.abspath(output_path)
-        print(dest)
-        with open(os.path.abspath(output_path), 'a') as f:
-            f.write(json.dumps(result))
-            f.write('\n')
+                    distance += math.sqrt(dx_squared + dy_squared)
+                    angle += abs_dtheta%(2*math.pi)
+
+                result[strategy] = {
+                    'distance' : distance/agent_count,
+                    'angle': angle/agent_count
+                }
+
+            dest = os.path.abspath(output_path)
+
+            with open(os.path.abspath(output_path), 'a') as f:
+                f.write(json.dumps(result))
+                f.write('\n')

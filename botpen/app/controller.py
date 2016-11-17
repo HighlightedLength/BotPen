@@ -1,4 +1,3 @@
-from pprint import pformat
 class Controller:
     def __init__(self, agent_service, world_service, logger):
         self.agent_service = agent_service

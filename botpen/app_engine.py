@@ -1,7 +1,6 @@
 #import botpen.bootstrap
 import botpen
 import sys
-from pprint import pprint
 
 class AppEngine:
 
@@ -41,4 +40,4 @@ class AppEngine:
 
         if self.renderer:
             self.renderer.close()
-        sys.exit()
+            sys.exit()

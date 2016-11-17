@@ -2,7 +2,7 @@ from aglyph.binder import Binder
 from aglyph.component import Reference
 from random import Random
 
-def bootstrap(config, output_path):
+def bootstrap(config):
     container = Binder()
     rng = __build_rng(config)
 
