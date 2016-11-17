@@ -28,7 +28,7 @@ class AppEngine:
                 view = self.controller.step()
                 if self.renderer:
                     self.renderer.display(view)
-                self.logger.log(view['estimates'])
+                self.logger.log(view)
             if self.renderer:
                 inputs = self.renderer.get_events()
 
