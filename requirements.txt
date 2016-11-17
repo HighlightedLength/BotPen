@@ -1,0 +1,12 @@
+Aglyph==2.1.1
+cycler==0.10.0
+matplotlib==1.5.3
+numpy==1.11.1
+pygame==1.9.2b8
+pykalman==0.9.5
+pyparsing==2.1.9
+python-dateutil==2.5.3
+pytz==2016.6.1
+PyYAML==3.12
+scipy==0.18.1
+six==1.10.0

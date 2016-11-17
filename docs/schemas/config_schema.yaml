@@ -1,0 +1,103 @@
+config:
+  type: object
+  properties:
+    defaults:
+      description: default settings for the agents
+      type: object
+      properties:
+        A:
+          description: >
+            2x2 array representing the A matrix
+            represents the effect the agent state has on its
+            dynamics
+          type: array
+          item:
+            type: array
+            item: decimal
+        B:
+          description: >
+            \\doubleR^2 vector of the B matrix
+            represents the effect inputs have on the system
+          type: array
+          item: decimal
+        H:
+          description: >
+            \\doubleR^2 vector of the H matrix
+            represents how the sensor detects
+          type: array
+          item: decimal
+        Wv:
+          description: >
+            \\doubleR^2 vector representing the variance of the process noise
+          type: array
+          item: decimal
+        Vv:
+          description: >
+            \\doubleR^2 vector representing the measurement noise
+          type: array
+          item: decimal
+    agents:
+      description: array of agents and their behaviors
+      type: array
+      item:
+        description: the configuration of the agent
+        properties:
+          id:
+            description: id of the agent
+            type: number
+          x0:
+            description: \\doubleR^2 vector of the initial positio
+          u:
+            description: how the input behaves
+            oneOf:
+              - description: >
+                  constants that change at the listed times
+                type: object
+                properties:
+                  behavior:
+                    description: the name of behavior
+                    type: string
+                    enum:
+                      - TimeVaryingConstants
+                  inputs:
+                    type: array
+                    item:
+                      type: object
+                      properties:
+                        time:
+                          description: the time to start the signal
+                          type: integer
+                          minimum: 0
+                        uc:
+                          description: \\doubleR^2 input constant to be used at the time
+                          type: array
+                          item: decimal
+          A:
+            description: >
+              2x2 array representing the A matrix
+              represents the effect the agent state has on its
+              dynamics
+            type: array
+            item:
+              type: array
+              item: decimal
+          B:
+            description: >
+              \\doubleR^2 vector of the B matrix
+              represents the effect inputs have on the system
+            type: array
+            item: decimal
+          H:
+            description: >
+              \\doubleR^2 vector of the H matrix
+              represents how the sensor detects
+            type: array
+            item: decimal
+          Wv:
+            description: >
+              \\doubleR^2 vector representing the variance of the process noise
+            type: array
+            item: decimal
+        required:
+          - x0
+          - u

@@ -1,0 +1,40 @@
+id: highlighted_length.bot_pen.domain_models#
+definitions:
+  agent:
+    description: stores the state of an agent
+    properties:
+      id:
+        type: string
+        description: >
+          primary key for this model
+          corresponds with the id of #/definitions/state
+      x:
+        type: array
+        description: >
+          a \\doubleR^3 vector that represents the x/y postion
+          as well as the orientation in degrees
+      y:
+        description: the y position of the agent_id
+        type: number
+      theta:
+        description: the orientation of the agent_id in radians
+        type: number
+  piecewise_velocity_behavior:
+    description:
+    properties:
+      agent_id:
+        description: key of the relevant agent
+        type: string
+      time:
+        description: time that the behavior kicks in
+        type: integer
+        minimum: 0
+      x:
+        description: the desired velocity in x direction
+        type: number
+      y:
+        description: the desired velocity in y direction
+        type: number
+      theta:
+        description: the desired angular velocity in radians
+        type: number

@@ -1,0 +1,9 @@
+id: bot_pen.data_repos
+definitions:
+  AgentRepo:
+    type: object
+    description: dictionary of agents by their id
+    additionalProperties:
+      $ref: bot_pen.data_models#Agent
+  BehaviorRepo:
+    type: object 

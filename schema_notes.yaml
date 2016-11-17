@@ -1,0 +1,48 @@
+agent:
+  type: object
+  properties:
+    x:
+      type: number
+    y:
+      type: number
+    theta:
+      type: number
+
+    actuation_noise_x:
+      type: number
+    actuation_noise_y:
+      type: number
+    actuation_noise_theta:
+      type: number
+
+    observation_noise_x:
+      type: number
+    observation_noise_y:
+      type: number
+    observation_noise_theta:
+      type: number
+
+
+parametric_behavior:
+  properties:
+    type:
+      type: string
+      pattern: parametric_behavior
+    behaviors:
+      item:
+        type:
+          $ref: "#/constant_behavior"
+constant_behavior:
+  properties:
+    type:
+      type: string
+      pattern: constant_behavior
+    time:
+      description: the time the behavior starts
+      type: number
+    x:
+      description: the x distance the agent will move
+    y:
+      description: the y distance the agent will move
+    theta:
+      description: the change in orientation of the agent
