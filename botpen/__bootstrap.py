@@ -14,7 +14,8 @@ def bootstrap(config, view_on, output_path):
         .init(
             config,
             Reference("app.Controller"),
-            Reference("view.Renderer")))
+            Reference("view.Renderer"),
+            Reference("view.Logger")))
 
     (container.bind("app.Controller",
             to = "botpen.app.Controller",
@@ -24,6 +25,9 @@ def bootstrap(config, view_on, output_path):
             Reference("domain.WorldService"),
             Reference("logistics.Logger")
         ))
+    (container.bind("view.Logger",
+            to = "botpen.view.services.Logger",
+            strategy = "singleton"))
 
     (container.bind("domain.AgentService",
             to = "botpen.domain.services.AgentService",

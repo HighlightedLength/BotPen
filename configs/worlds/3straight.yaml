@@ -2,9 +2,9 @@ agent_defaults:
   actuation_noise_x: 0.1
   actuation_noise_y: 0.1
   actuation_noise_theta: 0.1
-  observation_noise_x: 5
-  observation_noise_y: 5
-  observation_noise_theta: 5
+  observation_noise_x: 1
+  observation_noise_y: 1
+  observation_noise_theta: 1
   behavior_type: ParametricConstants
   behavior_config:
     - time: 0
@@ -47,8 +47,8 @@ world:
   limit: 2000
   size:
     - 650
-    - 100
+    - 200
 visuals:
   scale: 0.5
-  steps_per_frame: 1
+  steps_per_frame: 10
   frames_per_second: 12
