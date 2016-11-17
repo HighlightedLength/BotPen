@@ -59,7 +59,7 @@ class FormationEstimator:
             run += o.r * p.r * math.cos(p.theta - o.theta)
             rise += o.r * p.r * math.sin(p.theta - o.theta)
 
-        phi = math.atan2(rise, run)
+        phi = -math.atan2(rise, run)
 
         results = {}
         diff = 0
